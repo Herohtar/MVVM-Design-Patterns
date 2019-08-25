@@ -1,7 +1,7 @@
+using System;
+
 namespace ReactiveComponentModel
 {
-    using System;
-
     /// <summary>
     /// Produces deep clones of objects.
     /// </summary>

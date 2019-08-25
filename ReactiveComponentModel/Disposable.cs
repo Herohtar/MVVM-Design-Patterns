@@ -1,7 +1,7 @@
-﻿namespace ReactiveComponentModel
-{
-    using System;
+﻿using System;
 
+namespace ReactiveComponentModel
+{
     /// <summary>
     /// Base class for members implementing <see cref="IDisposable"/>.
     /// </summary>
@@ -15,7 +15,7 @@
         /// </summary>
         ~Disposable()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
 
         /// <summary>
@@ -30,7 +30,7 @@
         public void Dispose()
         {
             // Dispose all managed and unmanaged resources.
-            this.Dispose(true);
+            Dispose(true);
 
             // Take this object off the finalization queue and prevent finalization code for this
             // object from executing a second time.
@@ -56,7 +56,7 @@
         /// </summary>
         protected void ThrowIfDisposed()
         {
-            if (this.IsDisposed)
+            if (IsDisposed)
             {
                 throw new ObjectDisposedException(this.GetType().Name);
             }
@@ -74,17 +74,17 @@
 #pragma warning restore CA1063 // Implement IDisposable Correctly
         {
             // Check to see if Dispose has already been called.
-            if (!this.IsDisposed)
+            if (!IsDisposed)
             {
                 // If disposing managed and unmanaged resources.
                 if (disposing)
                 {
-                    this.DisposeManaged();
+                    DisposeManaged();
                 }
 
-                this.DisposeUnmanaged();
+                DisposeUnmanaged();
 
-                this.IsDisposed = true;
+                IsDisposed = true;
             }
         }
     }

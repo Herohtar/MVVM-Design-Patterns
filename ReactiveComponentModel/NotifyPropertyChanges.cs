@@ -1,12 +1,10 @@
+using System;
+using System.ComponentModel;
+using System.Reactive.Linq;
+using System.Runtime.CompilerServices;
+
 namespace ReactiveComponentModel
 {
-    using System;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Reactive.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-
     /// <summary>
     /// Notifies subscribers that a property in this instance is changing or has changed.
     /// </summary>
@@ -17,8 +15,8 @@ namespace ReactiveComponentModel
         /// </summary>
         event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
         {
-            add { this.propertyChanged += value; }
-            remove { this.propertyChanged -= value; }
+            add { propertyChanged += value; }
+            remove { propertyChanged -= value; }
         }
 
         /// <summary>
@@ -26,8 +24,8 @@ namespace ReactiveComponentModel
         /// </summary>
         event PropertyChangingEventHandler INotifyPropertyChanging.PropertyChanging
         {
-            add { this.propertyChanging += value; }
-            remove { this.propertyChanging -= value; }
+            add { propertyChanging += value; }
+            remove { propertyChanging -= value; }
         }
 
 #pragma warning disable IDE1006 // Naming Styles
@@ -45,12 +43,12 @@ namespace ReactiveComponentModel
         {
             get
             {
-                this.ThrowIfDisposed();
+                ThrowIfDisposed();
 
                 return Observable
                     .FromEventPattern<PropertyChangedEventHandler, PropertyChangedEventArgs>(
-                        h => this.propertyChanged += h,
-                        h => this.propertyChanged -= h)
+                        h => propertyChanged += h,
+                        h => propertyChanged -= h)
                     .Select(x => x.EventArgs.PropertyName);
             }
         }
@@ -65,12 +63,12 @@ namespace ReactiveComponentModel
         {
             get
             {
-                this.ThrowIfDisposed();
+                ThrowIfDisposed();
 
                 return Observable
                     .FromEventPattern<PropertyChangingEventHandler, PropertyChangingEventArgs>(
-                        h => this.propertyChanging += h,
-                        h => this.propertyChanging -= h)
+                        h => propertyChanging += h,
+                        h => propertyChanging -= h)
                     .Select(x => x.EventArgs.PropertyName);
             }
         }
@@ -81,11 +79,7 @@ namespace ReactiveComponentModel
         /// <param name="propertyName">Name of the property.</param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            Debug.Assert(
-                string.IsNullOrEmpty(propertyName) ||
-                (this.GetType().GetRuntimeProperty(propertyName) != null),
-                "Check that the property name exists for this instance.");
-            this.propertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            propertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>
@@ -101,7 +95,7 @@ namespace ReactiveComponentModel
 
             foreach (var propertyName in propertyNames)
             {
-                this.OnPropertyChanged(propertyName);
+                OnPropertyChanged(propertyName);
             }
         }
 
@@ -111,11 +105,7 @@ namespace ReactiveComponentModel
         /// <param name="propertyName">Name of the property.</param>
         protected virtual void OnPropertyChanging([CallerMemberName] string propertyName = null)
         {
-            Debug.Assert(
-                string.IsNullOrEmpty(propertyName) ||
-                (this.GetType().GetRuntimeProperty(propertyName) != null),
-                "Check that the property name exists for this instance.");
-            this.propertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
+            propertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
         }
 
         /// <summary>
@@ -131,7 +121,7 @@ namespace ReactiveComponentModel
 
             foreach (var propertyName in propertyNames)
             {
-                this.OnPropertyChanging(propertyName);
+                OnPropertyChanging(propertyName);
             }
         }
 
@@ -148,13 +138,13 @@ namespace ReactiveComponentModel
             TProp newValue,
             [CallerMemberName] string propertyName = null)
         {
-            this.ThrowIfDisposed();
+            ThrowIfDisposed();
 
-            if (!object.Equals(currentValue, newValue))
+            if (!Equals(currentValue, newValue))
             {
-                this.OnPropertyChanging(propertyName);
+                OnPropertyChanging(propertyName);
                 currentValue = newValue;
-                this.OnPropertyChanged(propertyName);
+                OnPropertyChanged(propertyName);
 
                 return true;
             }
@@ -175,13 +165,13 @@ namespace ReactiveComponentModel
             TProp newValue,
             params string[] propertyNames)
         {
-            this.ThrowIfDisposed();
+            ThrowIfDisposed();
 
-            if (!object.Equals(currentValue, newValue))
+            if (!Equals(currentValue, newValue))
             {
-                this.OnPropertyChanging(propertyNames);
+                OnPropertyChanging(propertyNames);
                 currentValue = newValue;
-                this.OnPropertyChanged(propertyNames);
+                OnPropertyChanged(propertyNames);
 
                 return true;
             }
@@ -201,16 +191,16 @@ namespace ReactiveComponentModel
             Action action,
             [CallerMemberName] string propertyName = null)
         {
-            this.ThrowIfDisposed();
+            ThrowIfDisposed();
 
             if (equal())
             {
                 return false;
             }
 
-            this.OnPropertyChanging(propertyName);
+            OnPropertyChanging(propertyName);
             action();
-            this.OnPropertyChanged(propertyName);
+            OnPropertyChanged(propertyName);
 
             return true;
         }
@@ -227,16 +217,16 @@ namespace ReactiveComponentModel
             Action action,
             params string[] propertyNames)
         {
-            this.ThrowIfDisposed();
+            ThrowIfDisposed();
 
             if (equal())
             {
                 return false;
             }
 
-            this.OnPropertyChanging(propertyNames);
+            OnPropertyChanging(propertyNames);
             action();
-            this.OnPropertyChanged(propertyNames);
+            OnPropertyChanged(propertyNames);
 
             return true;
         }

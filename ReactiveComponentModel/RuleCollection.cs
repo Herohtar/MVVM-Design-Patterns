@@ -1,9 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
 namespace ReactiveComponentModel
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-
     /// <summary>
     /// A collection of rules.
     /// </summary>
@@ -17,7 +17,7 @@ namespace ReactiveComponentModel
         /// <param name="error">The error if the object does not satisfy the rule.</param>
         /// <param name="rule">The rule to execute.</param>
         public void Add(string propertyName, object error, Func<T, bool> rule) =>
-            this.Add(new DelegateRule<T>(propertyName, error, rule));
+            Add(new DelegateRule<T>(propertyName, error, rule));
 
         /// <summary>
         /// Applies the <see cref="Rule{T}"/>'s contained in this instance to <paramref name="obj"/>.

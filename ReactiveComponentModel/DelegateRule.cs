@@ -1,7 +1,7 @@
+using System;
+
 namespace ReactiveComponentModel
 {
-    using System;
-
     /// <summary>
     /// Determines whether or not an object of type <typeparamref name="T"/> satisfies a rule and
     /// provides an error if it does not.
@@ -28,6 +28,6 @@ namespace ReactiveComponentModel
         /// <returns>
         /// <c>true</c> if the object satisfies the rule, otherwise <c>false</c>.
         /// </returns>
-        public override bool Apply(T obj) => this.rule(obj);
+        public override bool Apply(T obj) => rule(obj);
     }
 }

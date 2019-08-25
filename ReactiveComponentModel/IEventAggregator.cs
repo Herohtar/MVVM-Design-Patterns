@@ -1,7 +1,7 @@
+using System;
+
 namespace ReactiveComponentModel
 {
-    using System;
-
     /// <summary>
     /// Channels events from multiple objects into a single object to simplify registration for clients.
     /// </summary>
