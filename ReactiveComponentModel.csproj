@@ -8,6 +8,8 @@
     <Copyright>Copyright © 2019 Herohtar</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageTags>MVVM;Reactive;ComponentModel;</PackageTags>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <RepositoryUrl>https://github.com/Herohtar/ReactiveComponentModel</RepositoryUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
