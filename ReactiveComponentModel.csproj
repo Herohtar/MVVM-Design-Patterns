@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>ReactiveComponentModel</PackageId>
-    <Version>0.1.1</Version>
+    <Version>0.2.0</Version>
     <Authors>Herohtar</Authors>
     <Description>An implementation of several System.ComponentModel interfaces designed to work with MVVM and System.Reactive</Description>
     <Copyright>Copyright © 2019 Herohtar</Copyright>
