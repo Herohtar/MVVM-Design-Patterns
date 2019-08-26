@@ -8,7 +8,6 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  publishProject: 'ReactiveComponentModel.csproj'
   buildConfiguration: 'Release'
 
 steps:
@@ -36,7 +35,6 @@ steps:
   displayName: Pack
   inputs:
     command: pack
-#    packagesToPack: '$(publishProject)'
 
 - task: DotNetCoreCLI@2
   displayName: Push
