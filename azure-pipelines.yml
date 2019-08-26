@@ -42,6 +42,6 @@ steps:
     command: custom
     custom: nuget
     arguments: >
-      push $(Build.ArtifactStagingDirectory)/*.nupkg
+      push $(Build.ArtifactStagingDirectory)\*.nupkg
       -s $(NuGetSourceServerUrl)
       -k $(NuGetSourceServerApiKey)
