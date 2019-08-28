@@ -29,7 +29,7 @@ steps:
 - task: CopyFiles@2
   inputs:
     sourceFolder: '$(Build.ArtifactStagingDirectory)'
-    contents: '**\*.nupkg'
+    contents: '**\*.*nupkg'
     targetFolder: '$(Build.ArtifactStagingDirectory)\Package'
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
