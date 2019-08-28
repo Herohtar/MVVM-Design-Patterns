@@ -2,7 +2,10 @@
 # Build and publish .NET Core NuGet package projects
 
 trigger:
-- master
+  branches:
+    include:
+      - master
+      - refs/tags/v*
 
 pool:
   vmImage: 'windows-latest'
