@@ -24,4 +24,4 @@ steps:
   displayName: Build
   inputs:
     command: build
-    arguments: '-c $(BuildConfiguration)'
+    arguments: '-c $(BuildConfiguration) -o $(Build.ArtifactStagingDirectory)'
