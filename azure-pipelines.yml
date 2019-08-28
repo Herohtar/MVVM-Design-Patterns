@@ -27,6 +27,7 @@ steps:
     arguments: '-c $(BuildConfiguration) -o $(Build.ArtifactStagingDirectory)'
 
 - task: CopyFiles@2
+  displayName: 'Copy Files'
   inputs:
     sourceFolder: '$(Build.ArtifactStagingDirectory)'
     contents: '**\*.*nupkg'
@@ -34,6 +35,7 @@ steps:
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
 - task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifacts'
   inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)\Package'
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
