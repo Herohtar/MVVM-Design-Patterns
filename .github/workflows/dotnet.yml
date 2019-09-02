@@ -38,13 +38,6 @@ jobs:
       #if: (job.steps.build_step.status == success()) && (github.event_name != 'pull_request')
       if: success() && (github.event_name != 'pull_request')
 
-    - name: NuGet Push
-      run: dotnet nuget push ./publish/*.nupkg -s https://api.nuget.org/v3/index.json -k $NUGET_API_KEY
-      env:
-        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-      #if: (job.steps.build_step.status == success()) && (github.event_name != 'pull_request') && startsWith(github.ref, 'refs/tags/v')
-      if: success() && (github.event_name != 'pull_request') && startsWith(github.ref, 'refs/tags/v')
-
     - name: Draft Release
       uses: docker://softprops/action-gh-release
       with:
@@ -52,4 +45,11 @@ jobs:
         files: publish/*.*nupkg
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      if: success() && (github.event_name != 'pull_request') && startsWith(github.ref, 'refs/tags/v')
+
+    - name: NuGet Push
+      run: dotnet nuget push ./publish/*.nupkg -s https://api.nuget.org/v3/index.json -k $NUGET_API_KEY
+      env:
+        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      #if: (job.steps.build_step.status == success()) && (github.event_name != 'pull_request') && startsWith(github.ref, 'refs/tags/v')
       if: success() && (github.event_name != 'pull_request') && startsWith(github.ref, 'refs/tags/v')
