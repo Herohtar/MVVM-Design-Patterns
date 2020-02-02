@@ -5,7 +5,7 @@
     <Version>1.0.0</Version>
     <Authors>Herohtar</Authors>
     <Description>An implementation of several System.ComponentModel interfaces designed to work with MVVM and System.Reactive</Description>
-    <Copyright>Copyright © 2019 Herohtar</Copyright>
+    <Copyright>Copyright © 2020 Herohtar</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageTags>MVVM;Reactive;ComponentModel;</PackageTags>
     <IncludeSymbols>true</IncludeSymbols>
